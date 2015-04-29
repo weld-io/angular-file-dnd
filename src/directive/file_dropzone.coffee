@@ -50,8 +50,11 @@ angular.module('omr.angularFileDnD', [])
 
       # on drop events we stop browser and read the dropped file via the FileReader
       # the resulting droped file is bound to the image property of the scope of this directive
+      # Only do this when a FILE is being dropped
       element.bind 'drop', (event) ->
-        event?.preventDefault()
+        unless (event?.originalEvent?.dataTransfer?)
+          return;
+        event.preventDefault()
         element.removeClass scope.dropzoneHoverClass
         reader = new FileReader()
         reader.onload = (evt) ->

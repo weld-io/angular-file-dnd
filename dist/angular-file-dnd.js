@@ -51,10 +51,11 @@
           return element.removeClass(scope.dropzoneHoverClass);
         });
         return element.bind('drop', function(event) {
-          var file, name, reader, size, type;
-          if (event != null) {
-            event.preventDefault();
+          var file, name, reader, size, type, _ref;
+          if (!((event != null ? (_ref = event.originalEvent) != null ? _ref.dataTransfer : void 0 : void 0) != null)) {
+            return;
           }
+          event.preventDefault();
           element.removeClass(scope.dropzoneHoverClass);
           reader = new FileReader();
           reader.onload = function(evt) {
